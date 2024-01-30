@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Shows</title>
+</head>
+<body>
+<h2>IMDB: Top 5 Episodes</h2>
+<table border="solid" width="100%">
+    <tr>
+        <th>Title</th>
+        <th>Episode</th>
+        <th>Rating</th>
+    </tr>
+    <tr th:object="${show1}">
+        <td th:text="*{title}"></td>
+        <td th:text="*{episode}"></td>
+        <td th:text="*{rating}"></td>
+    </tr>
+    <tr th:object="${show2}">
+        <td th:text="*{title}"></td>
+        <td th:text="*{episode}"></td>
+        <td th:text="*{rating}"></td>
+    </tr>
+    <tr>
+        <td th:text="${#strings.contains(show1.title, 'Bad')}"></td>
+    </tr>
+</table>
+</body>
+</html>
