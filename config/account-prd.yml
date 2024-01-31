@@ -1,0 +1,16 @@
+#spring:
+#  config:
+#    activate:
+#      on-profile: "prd"
+
+build:
+  version: "1.0"
+
+account:
+  message: "Welcome to Bank account related prod APIs "
+  contactDetails:
+    name: "John Smith - Product Owner"
+    email: "johnsmith@eazybank.com"
+  onCallSupport:
+    - (453) 392-4829
+    - (236) 203-0384
