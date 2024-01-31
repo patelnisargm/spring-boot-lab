@@ -6,5 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 @ConfigurationProperties(value = "loan")
-public record LoanContactInfoDto(String message, Map<String, String> contactDetails, List<String> onCallSupport) {
+public class LoanContactInfoDto {
+
+    private String message;
+    private Map<String,String > contactDetails;
+    private List<String> onCallSupport;
+
 }
