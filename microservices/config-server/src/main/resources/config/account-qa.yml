@@ -7,7 +7,7 @@ build:
   version: "2.0"
 
 account:
-  message: "Welcome to Bank account related QA APIs "
+  message: "Welcome to Bank account related QA-test APIs "
   contactDetails:
     name: "Emma - QA Lead"
     email: "emma@eazybank.com"
