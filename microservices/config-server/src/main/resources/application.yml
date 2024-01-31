@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: "configserver"
+    name: "cloudconfigserver"
   profiles:
     # active: native
     active: git
