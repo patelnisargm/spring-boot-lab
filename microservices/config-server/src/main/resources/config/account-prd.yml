@@ -10,7 +10,7 @@ account:
   message: "Welcome to Bank account related prod APIs "
   contactDetails:
     name: "John Smith - Product Owner"
-    email: "johnsmith@eazybank.com"
+    email: "{cipher}da1d3dc6ae45e56a91e682bf0f6d598987c4a2c3cb5bda28c5fee06755d734bb6c83b622ae88593c83cdaea3357f13a8"
   onCallSupport:
     - (453) 392-4829
     - (236) 203-0384
