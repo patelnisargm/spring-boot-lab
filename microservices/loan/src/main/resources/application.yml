@@ -15,19 +15,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-#  config:
-#    import:
-#      - "application-qa.yml"
-#      - "application-prd.yml"
+  config:
+    import: "optional:configserver:http://localhost:8070/"
 
-build:
-  version: "3.0"
-
-loan:
-  message: "Welcome to loan account related local APIs "
-  contactDetails:
-    name: "John Doe - Developer"
-    email: "john@eazybank.com"
-  onCallSupport:
-    - (555) 555-1234
-    - (555) 523-1345
