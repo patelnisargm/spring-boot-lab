@@ -14,7 +14,8 @@ spring:
         # search-locations: "classpath:/config"
         # search-locations: "file:///Users//eazybytes//Documents//config"
         git:
-          uri: "https://github.com/patelnisargm/spring-boot-lab/config"
+          uri: "https://github.com/patelnisargm/spring-boot-lab.git"
+          searchPaths: microservices/config-server/src/main/resources/config
           default-label: R1.0
           timeout: 5
           clone-on-start: true
