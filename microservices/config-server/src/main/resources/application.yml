@@ -16,15 +16,15 @@ spring:
         git:
           uri: "https://github.com/patelnisargm/spring-boot-lab.git"
           searchPaths: microservices/config-server/src/main/resources/config
-          default-label: R1.0
+          default-label: R2.0
           timeout: 5
           clone-on-start: true
           force-pull: true
-    rabbitmq:
-      host: "localhost"
-      port: 5672
-      username: "guest"
-      password: "guest"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
 
 management:
   endpoints:
