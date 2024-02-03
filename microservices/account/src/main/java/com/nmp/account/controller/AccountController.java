@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Validated
 @RestController
-@RequestMapping(path = "/account", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountController {
 
     @Autowired

@@ -31,7 +31,7 @@ import java.util.Optional;
         description = "CRUD REST APIs in EazyBank to CREATE, UPDATE, FETCH AND DELETE loan details"
 )
 @Validated
-@RestController @RequestMapping(value = "/loan", produces = (MediaType.APPLICATION_JSON_VALUE))
+@RestController @RequestMapping(value = "", produces = (MediaType.APPLICATION_JSON_VALUE))
 public class LoanController {
 
     @Autowired
