@@ -70,7 +70,7 @@
 				<version>3.4.0</version>
 				<configuration>
 					<to>
-						<image>patelnisargm/${project.artifactId}:1.0</image>
+						<image>patelnisargm/${project.artifactId}:2.0</image>
 					</to>
 				</configuration>
 			</plugin>

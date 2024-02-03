@@ -1,28 +1,28 @@
 services:
-  rabbit:
-    image: rabbitmq:3.12-management
-    hostname: rabbitmq
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    healthcheck:
-      test: rabbitmq-diagnostics check_port_connectivity
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 5s
-    extends:
-      file: common-config.yml
-      service: network-deploy-service
+#  rabbit:
+#    image: rabbitmq:3.12-management
+#    hostname: rabbitmq
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    healthcheck:
+#      test: rabbitmq-diagnostics check_port_connectivity
+#      interval: 10s
+#      timeout: 5s
+#      retries: 10
+#      start_period: 5s
+#    extends:
+#      file: common-config.yml
+#      service: network-deploy-service
 
   configserver:
-    image: "eazybytes/configserver:1.0"
+    image: "patelnisargm/configserver:2.0"
     container_name: configserver-ms
     ports:
       - "8070:8070"
-    depends_on:
-      rabbit:
-        condition: service_healthy
+#    depends_on:
+#      rabbit:
+#        condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
       interval: 10s
@@ -33,8 +33,25 @@ services:
       file: common-config.yml
       service: microservice-base-config
 
+  eurekaserver:
+    image: "patelnisarg/eurekaserver:s8"
+    container_name: eurekaserver-ms
+    ports:
+      - "8071:8071"
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: "eurekaserver"
+
   account:
-    image: "patelnisargm/account:1.0"
+    image: "patelnisargm/account:2.0"
     container_name: account-ms
     ports:
       - "8080:8080"
@@ -42,10 +59,10 @@ services:
       SPRING_APPLICATION_NAME: "account"
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   loan:
-    image: "patelnisargm/loan:1.0"
+    image: "patelnisargm/loan:2.0"
     container_name: loan-ms
     ports:
       - "8090:8090"
@@ -53,10 +70,10 @@ services:
       SPRING_APPLICATION_NAME: "loan"
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   cards:
-    image: "patelnisargm/card:1.0"
+    image: "patelnisargm/card:2.0"
     container_name: card-ms
     ports:
       - "9000:9000"
@@ -64,7 +81,7 @@ services:
       SPRING_APPLICATION_NAME: "card"
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
 networks:
   bank:

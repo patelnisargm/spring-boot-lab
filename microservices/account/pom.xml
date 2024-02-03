@@ -52,6 +52,14 @@
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>-->
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity6</artifactId>
         </dependency>
@@ -107,7 +115,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>patelnisargm/${project.artifactId}:1.0</name>
+                        <name>patelnisargm/${project.artifactId}:2.0</name>
                     </image>
                     <excludes>
                         <exclude>
@@ -123,7 +131,7 @@
                 <version>3.4.0</version>
                 <configuration>
                     <to>
-                        <image>patelnisargm/${project.artifactId}:1.0</image>
+                        <image>patelnisargm/${project.artifactId}:2.0</image>
                     </to>
                 </configuration>
             </plugin>
