@@ -17,11 +17,11 @@ public class CustomerDetailsImpl implements ICustomerDetailsService {
     private LoanFeignClient loanFeignClient;
     private CardFeignClient cardFeignClient;
     @Override
-    public CustomerDetailsDto fetchCustomerDetails(String mobileNumber) {
+    public CustomerDetailsDto fetchCustomerDetails(String correlationID, String mobileNumber) {
         CustomerDetailsDto customerDetailsDto = new CustomerDetailsDto();
         customerDetailsDto.setCustomerDto(accountService.fetchAccount(mobileNumber));
-        customerDetailsDto.setLoanDto(loanFeignClient.fetchLoanDetails(mobileNumber).getBody());
-        customerDetailsDto.setCardDto(cardFeignClient.fetchCardDetails(mobileNumber).getBody());
+        customerDetailsDto.setLoanDto(loanFeignClient.fetchLoanDetails(correlationID, mobileNumber).getBody());
+        customerDetailsDto.setCardDto(cardFeignClient.fetchCardDetails(correlationID, mobileNumber).getBody());
         return customerDetailsDto;
     }
 }

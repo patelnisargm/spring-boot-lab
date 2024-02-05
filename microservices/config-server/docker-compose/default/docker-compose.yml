@@ -16,7 +16,7 @@ services:
 #      service: network-deploy-service
 
   configserver:
-    image: "patelnisargm/configserver:2.0"
+    image: "patelnisargm/configserver:3.0"
     container_name: configserver-ms
     ports:
       - "8070:8070"
@@ -34,7 +34,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: "patelnisarg/eurekaserver:s8"
+    image: "patelnisarg/eurekaserver:3.0"
     container_name: eurekaserver-ms
     ports:
       - "8071:8071"
@@ -51,10 +51,16 @@ services:
       SPRING_APPLICATION_NAME: "eurekaserver"
 
   account:
-    image: "patelnisargm/account:2.0"
+    image: "patelnisargm/account:3.0"
     container_name: account-ms
     ports:
       - "8080:8080"
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "account"
     extends:
@@ -62,10 +68,16 @@ services:
       service: microservice-eureka-config
 
   loan:
-    image: "patelnisargm/loan:2.0"
+    image: "patelnisargm/loan:3.0"
     container_name: loan-ms
     ports:
       - "8090:8090"
+    healthcheck:
+      test: "curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "loan"
     extends:
@@ -73,12 +85,36 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "patelnisargm/card:2.0"
+    image: "patelnisargm/card:3.0"
     container_name: card-ms
     ports:
       - "9000:9000"
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
     environment:
       SPRING_APPLICATION_NAME: "card"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
+  gatewayserver:
+    image: "patelnisargm/gatewayserver:3.0"
+    container_name: gatewayserver-ms
+    ports:
+      - "8072:8072"
+    depends_on:
+      accounts:
+        condition: service_healthy
+      loans:
+        condition: service_healthy
+      cards:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "gatewayserver"
     extends:
       file: common-config.yml
       service: microservice-eureka-config

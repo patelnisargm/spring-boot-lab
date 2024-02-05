@@ -7,7 +7,7 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: false
           lowerCaseServiceId: true
 
 management:
@@ -31,5 +31,5 @@ info:
 logging:
   level:
     com:
-      eazybytes:
+      nmp:
         gatewayserver: DEBUG
