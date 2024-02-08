@@ -16,6 +16,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
+		<otelVersion>2.0.0</otelVersion>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -45,7 +46,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.opentelemetry.javaagent</groupId>
+			<artifactId>opentelemetry-javaagent</artifactId>
+			<version>${otelVersion}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
 	</dependencies>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -70,7 +82,7 @@
 				<version>3.4.0</version>
 				<configuration>
 					<to>
-						<image>patelnisargm/${project.artifactId}:2.0</image>
+						<image>patelnisargm/${project.artifactId}:3.0</image>
 					</to>
 				</configuration>
 			</plugin>

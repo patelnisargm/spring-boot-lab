@@ -102,8 +102,9 @@ public class LoanController {
                                                      @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
                                                      String mobileNumber) {
 
+        logger.debug("fetchLoanDetails method start");
         LoanDto loansDto = loanService.fetchLoan(mobileNumber);
-        logger.debug("Bank-correlation-id found: {}", correlationID);
+        logger.debug("fetchLoanDetails method start");
         return ResponseEntity.status(HttpStatus.OK).body(loansDto);
     }
 

@@ -30,12 +30,15 @@ public class SecurityConfig {
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager);
         authenticationFilter.setFilterProcessesUrl("/authenticate");
         http
-                .headers(headers -> headers.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
+                .headers(
+                        headers -> headers.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())
+                )
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         authorize -> authorize.requestMatchers("/h2/**", "/actuator/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, SecurityConstants.REGISTER_PATH).permitAll()
-                                .anyRequest().authenticated())
+                                .anyRequest().authenticated()
+                )
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
                 .addFilter(authenticationFilter)
                 .addFilterAfter(new JWTAuthenticationFilter(), AuthenticationFilter.class)

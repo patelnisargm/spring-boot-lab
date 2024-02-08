@@ -24,7 +24,8 @@ public class CustomerDetailsController {
     public ResponseEntity<CustomerDetailsDto> fetchCustomerDetails(@RequestHeader("bank-correlation-id") String correlationID,
                                                                    @RequestParam @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
                                                            String mobileNumber) {
-        logger.debug("Bank-correlation-id found: {}", correlationID);
+        logger.debug("fetchCustomerDetails method start");
+        logger.debug("fetchCustomerDetails method end");
         return new ResponseEntity<>(customerDetailsService.fetchCustomerDetails(correlationID, mobileNumber), HttpStatus.OK);
     }
 }
