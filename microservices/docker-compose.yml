@@ -1,6 +1,6 @@
 services:
   account:
-    image: "patelnisargm/account:3.0"
+    image: "patelnisargm/account:3.1"
     container_name: account-ms
     ports:
       - "8080:8080"
@@ -11,7 +11,7 @@ services:
     networks:
       - eazybank
   loan:
-    image: "patelnisargm/loan:3.0"
+    image: "patelnisargm/loan:3.1"
     container_name: loan-ms
     ports:
       - "8090:8090"
@@ -22,7 +22,7 @@ services:
     networks:
       - eazybank
   card:
-    image: "patelnisargm/card:3.0"
+    image: "patelnisargm/card:3.1"
     container_name: card-ms
     ports:
       - "9000:9000"

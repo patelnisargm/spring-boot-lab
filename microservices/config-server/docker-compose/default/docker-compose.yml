@@ -15,17 +15,30 @@ services:
 #      file: common-config.yml
 #      service: network-deploy-service
 
-  redis:
-    image: redis
+  keycloak:
+    image: quay.io/keycloak/keycloak:22.0.1
+    container_name: keycloak
     ports:
-      - "6379:6379"
-    healthcheck:
-      test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
-      timeout: 10s
-      retries: 10
+      - "7080:8080"
+    environment:
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "admin"
+    command: "start-dev"
     extends:
       file: common-config.yml
       service: network-deploy-service
+
+#  redis:
+#    image: redis
+#    ports:
+#      - "6379:6379"
+#    healthcheck:
+#      test: [ "CMD-SHELL", "redis-cli ping | grep PONG" ]
+#      timeout: 10s
+#      retries: 10
+#    extends:
+#      file: common-config.yml
+#      service: network-deploy-service
 
   read:
     image: grafana/loki:2.9.2
@@ -227,7 +240,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "patelnisargm/configserver:3.0"
+    image: "patelnisargm/configserver:3.1"
     container_name: configserver-ms
     ports:
       - "8070:8070"
@@ -247,7 +260,7 @@ services:
       OTEL_SERVICE_NAME: "configserver"
 
   eurekaserver:
-    image: "patelnisarg/eurekaserver:3.0"
+    image: "patelnisarg/eurekaserver:3.1"
     container_name: eurekaserver-ms
     ports:
       - "8071:8071"
@@ -265,7 +278,7 @@ services:
       OTEL_SERVICE_NAME: "eurekaserver"
 
   account:
-    image: "patelnisargm/account:3.0"
+    image: "patelnisargm/account:3.1"
     container_name: account-ms
     ports:
       - "8080:8080"
@@ -283,7 +296,7 @@ services:
       service: microservice-eureka-config
 
   loan:
-    image: "patelnisargm/loan:3.0"
+    image: "patelnisargm/loan:3.1"
     container_name: loan-ms
     ports:
       - "8090:8090"
@@ -301,7 +314,7 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "patelnisargm/card:3.0"
+    image: "patelnisargm/card:3.1"
     container_name: card-ms
     ports:
       - "9000:9000"
@@ -319,7 +332,7 @@ services:
       service: microservice-eureka-config
 
   gatewayserver:
-    image: "patelnisargm/gatewayserver:3.0"
+    image: "patelnisargm/gatewayserver:3.1"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"
@@ -330,15 +343,16 @@ services:
         condition: service_healthy
       cards:
         condition: service_healthy
-      redis:
-        condition: service_healthy
+#      redis:
+#        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "gatewayserver"
-      SPRING_DATA_REDIS_CONNECT-TIMEOUT: 2s
-      SPRING_DATA_REDIS_HOST: redis
-      SPRING_DATA_REDIS_PORT: 6379
-      SPRING_DATA_REDIS_TIMEOUT: 1s
+#      SPRING_DATA_REDIS_CONNECT-TIMEOUT: 2s
+#      SPRING_DATA_REDIS_HOST: redis
+#      SPRING_DATA_REDIS_PORT: 6379
+#      SPRING_DATA_REDIS_TIMEOUT: 1s
       OTEL_SERVICE_NAME: "gatewayserver"
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: "http://keycloak:8080/realms/master/protocol/openid-connect/certs"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
