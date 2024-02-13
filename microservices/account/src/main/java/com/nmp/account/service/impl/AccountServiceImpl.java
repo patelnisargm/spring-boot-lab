@@ -2,6 +2,7 @@ package com.nmp.account.service.impl;
 
 import com.nmp.account.constants.AccountConstants;
 import com.nmp.account.dto.AccountDto;
+import com.nmp.account.dto.AccountMessageDto;
 import com.nmp.account.dto.CustomerDto;
 import com.nmp.account.entity.Account;
 import com.nmp.account.entity.Customer;
@@ -13,6 +14,9 @@ import com.nmp.account.repository.AccountRepository;
 import com.nmp.account.repository.CustomerRepository;
 import com.nmp.account.service.IAccountService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -23,6 +27,8 @@ public class AccountServiceImpl implements IAccountService {
 
     private AccountRepository accountRepository;
     private CustomerRepository customerRepository;
+    private StreamBridge streamBridge;
+    private static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
 
     @Override
     public void createAccount(CustomerDto customerDto) {
@@ -30,7 +36,16 @@ public class AccountServiceImpl implements IAccountService {
             throw new CustomerAlreadyExistsException(customerDto.getMobileNumber());
         Customer customer = CustomerMapper.mapToCustomer(customerDto, new Customer());
         Customer savedCustomer = customerRepository.save(customer);
-        accountRepository.save(createAccount(savedCustomer));
+        Account savedAccount = accountRepository.save(createAccount(savedCustomer));
+        sendCommunication(savedAccount, savedCustomer);
+    }
+
+    private void sendCommunication(Account savedAccount, Customer savedCustomer) {
+        var accountsMsgDto = new AccountMessageDto(savedAccount.getAccountNumber(),
+                savedCustomer.getName(), savedCustomer.getEmail(), savedCustomer.getMobileNumber());
+        logger.info("Sending Communication request for the details: {}", accountsMsgDto);
+        var result = streamBridge.send("sendCommunication-out-0", accountsMsgDto);
+        logger.info("Is the Communication request successfully triggered ? : {}", result);
     }
 
     @Override
@@ -80,6 +95,20 @@ public class AccountServiceImpl implements IAccountService {
         //accountRepository.deleteByCustomerCustomerId(customer.getCustomerId());
         customerRepository.deleteById(customer.getCustomerId());
         return true;
+    }
+
+    @Override
+    public boolean updateCommunicationStatus(Long accountNumber) {
+        boolean isUpdated = false;
+        if (accountNumber != null) {
+            Account account =  accountRepository.findById(accountNumber).orElseThrow(
+                    () -> new ResourceNotFoundException("Account", "AccountNumber", accountNumber.toString())
+            );
+            account.setNotified(true);
+            accountRepository.save(account);
+            isUpdated = true;
+        }
+        return isUpdated;
     }
 
     /**

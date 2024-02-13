@@ -21,9 +21,9 @@ public class SecurityConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
         serverHttpSecurity.authorizeExchange(
                 authorizeExchangeSpec -> authorizeExchangeSpec.pathMatchers(HttpMethod.GET).permitAll()
-                        .pathMatchers("/bank/account/**\"").hasRole("account")
-                        .pathMatchers("/bank/loan/**\"").hasRole("loan")
-                        .pathMatchers("/bank/card/**\"").hasRole("card")
+                        .pathMatchers("/bank/account/**").hasRole("account")
+                        .pathMatchers("/bank/loan/**").hasRole("loan")
+                        .pathMatchers("/bank/card/**").hasRole("card")
         )
                 .oauth2ResourceServer(
                         oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec.jwt(

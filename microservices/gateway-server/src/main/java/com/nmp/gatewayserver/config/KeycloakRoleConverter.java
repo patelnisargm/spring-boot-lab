@@ -1,6 +1,7 @@
 package com.nmp.gatewayserver.config;
 
 
+import org.springframework.boot.autoconfigure.gson.GsonProperties;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,10 +27,11 @@ public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedA
         if (realmAccess == null || realmAccess.isEmpty()) {
             return new ArrayList<>();
         }
-        List<String> roleNames = (List<String>) realmAccess.get("roles");
+        List<String> roleNames = ((List<String>) realmAccess.get("roles")).stream().map(rolename -> "ROLE_" + rolename).collect(Collectors.toList());
+        System.out.println(roleNames);
         //(List<String>) realmAccess.get("roles")
-        Collection<GrantedAuthority> returnValue = roleNames
-                .stream().map(rolename -> "ROLE" + rolename)
+        Collection<GrantedAuthority> returnValue = ((List<String>) realmAccess.get("roles"))
+                .stream().map(rolename -> "ROLE_" + rolename)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
         return returnValue;

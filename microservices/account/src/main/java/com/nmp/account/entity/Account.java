@@ -25,6 +25,9 @@ public class Account extends BaseEntity {
     @Column(name = "branch_address", nullable = false)
     private String branchAddress;
 
+    @Column(name = "notified")
+    private boolean notified;
+
     @OneToOne(optional = false)
     @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     private Customer customer;
