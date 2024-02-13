@@ -359,9 +359,9 @@ services:
     container_name: message-ms
 #    ports:
 #      - "9010:9010"
-    depends_on:
-      rabbit:
-        condition: service_healthy
+#    depends_on:
+#      rabbit:
+#        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "message"
       OTEL_SERVICE_NAME: "message"
