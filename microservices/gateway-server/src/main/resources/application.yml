@@ -4,11 +4,20 @@ spring:
   config:
     import: "optional:configserver:http://localhost:8070/"
   cloud:
-    gateway:
+    kubernetes:
       discovery:
-        locator:
+        enabled: true
+        all-namespaces: true
+    discovery:
+      client:
+        health-indicator:
           enabled: false
-          lowerCaseServiceId: true
+    gateway:
+#Line #9 to #12 are to discover eureka server clients
+#      discovery:
+#        locator:
+#          enabled: false
+#          lowerCaseServiceId: true
       httpclient:
         connect-timeout: 1000
         response-timeout: 10s

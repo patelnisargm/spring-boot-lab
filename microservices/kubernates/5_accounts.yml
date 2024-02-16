@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: account
-        image: patelnisargm/account:4.1
+        image: patelnisargm/account:4.2
         ports:
         - containerPort: 8080
         env:

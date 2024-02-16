@@ -1,6 +1,6 @@
 services:
   account:
-    image: "patelnisargm/account:4.1"
+    image: "patelnisargm/account:4.2"
     container_name: account-ms
     ports:
       - "8080:8080"
@@ -11,7 +11,7 @@ services:
     networks:
       - bank
   loan:
-    image: "patelnisargm/loan:4.1"
+    image: "patelnisargm/loan:4.2"
     container_name: loan-ms
     ports:
       - "8090:8090"
@@ -22,7 +22,7 @@ services:
     networks:
       - bank
   card:
-    image: "patelnisargm/card:4.1"
+    image: "patelnisargm/card:4.2"
     container_name: card-ms
     ports:
       - "9000:9000"

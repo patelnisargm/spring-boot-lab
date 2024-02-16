@@ -52,9 +52,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bus-amqp</artifactId>
         </dependency>-->
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-kubernetes-discoveryclient</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -88,9 +92,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-stream</artifactId>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-kafka</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -138,7 +146,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>patelnisargm/${project.artifactId}:4.1</name>
+                        <name>patelnisargm/${project.artifactId}:4.2</name>
                     </image>
                     <excludes>
                         <exclude>
@@ -154,7 +162,7 @@
                 <version>3.4.0</version>
                 <configuration>
                     <to>
-                        <image>patelnisargm/${project.artifactId}:4.1</image>
+                        <image>patelnisargm/${project.artifactId}:4.2</image>
                     </to>
                 </configuration>
             </plugin>

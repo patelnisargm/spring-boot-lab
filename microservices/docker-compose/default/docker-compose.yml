@@ -262,7 +262,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "patelnisargm/configserver:4.1"
+    image: "patelnisargm/configserver:4.2"
     container_name: configserver-ms
     ports:
       - "8070:8070"
@@ -282,7 +282,7 @@ services:
       OTEL_SERVICE_NAME: "configserver"
 
   eurekaserver:
-    image: "patelnisarg/eurekaserver:4.1"
+    image: "patelnisarg/eurekaserver:4.2"
     container_name: eurekaserver-ms
     ports:
       - "8071:8071"
@@ -300,7 +300,7 @@ services:
       OTEL_SERVICE_NAME: "eurekaserver"
 
   account:
-    image: "patelnisargm/account:4.1"
+    image: "patelnisargm/account:4.2"
     container_name: account-ms
 #    ports:
 #      - "8080:8080"
@@ -319,7 +319,7 @@ services:
       service: microservice-eureka-config
 
   loan:
-    image: "patelnisargm/loan:4.1"
+    image: "patelnisargm/loan:4.2"
     container_name: loan-ms
 #    ports:
 #      - "8090:8090"
@@ -337,7 +337,7 @@ services:
       service: microservice-eureka-config
 
   card:
-    image: "patelnisargm/card:4.1"
+    image: "patelnisargm/card:4.2"
     container_name: card-ms
 #    ports:
 #      - "9000:9000"
@@ -355,7 +355,7 @@ services:
       service: microservice-eureka-config
 
   message:
-    image: "patelnisargm/message:4.1"
+    image: "patelnisargm/message:4.2"
     container_name: message-ms
 #    ports:
 #      - "9010:9010"
@@ -371,7 +371,7 @@ services:
       service: network-deploy-service
 
   gatewayserver:
-    image: "patelnisargm/gatewayserver:4.1"
+    image: "patelnisargm/gatewayserver:4.2"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"

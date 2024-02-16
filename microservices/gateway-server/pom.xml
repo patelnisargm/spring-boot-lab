@@ -31,9 +31,13 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-kubernetes-discoveryclient</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -109,7 +113,7 @@
 				<version>3.4.0</version>
 				<configuration>
 					<to>
-						<image>patelnisargm/${project.artifactId}:4.1</image>
+						<image>patelnisargm/${project.artifactId}:4.2</image>
 					</to>
 				</configuration>
 			</plugin>

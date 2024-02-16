@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: loan
-        image: patelnisargm/loan:4.1
+        image: patelnisargm/loan:4.2
         ports:
         - containerPort: 8090
         env:

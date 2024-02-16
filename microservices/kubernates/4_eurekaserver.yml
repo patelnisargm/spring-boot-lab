@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: eurekaserver
-        image: patelnisargm/eurekaserver:4.1
+        image: patelnisargm/eurekaserver:4.2
         ports:
         - containerPort: 8071
         env:
