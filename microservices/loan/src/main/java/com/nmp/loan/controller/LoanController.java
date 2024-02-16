@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @Tag(
-        name = "CRUD REST APIs for Loans in EazyBank",
-        description = "CRUD REST APIs in EazyBank to CREATE, UPDATE, FETCH AND DELETE loan details"
+        name = "CRUD REST APIs for Loan in bank",
+        description = "CRUD REST APIs in bank to CREATE, UPDATE, FETCH AND DELETE loan details"
 )
 @Validated
 @RestController @RequestMapping(value = "", produces = (MediaType.APPLICATION_JSON_VALUE))
@@ -51,7 +51,7 @@ public class LoanController {
 
     @Operation(
             summary = "Create Loan REST API",
-            description = "REST API to create new loan inside EazyBank"
+            description = "REST API to create new loan inside bank"
     )
     @ApiResponses({
             @ApiResponse(
@@ -103,9 +103,9 @@ public class LoanController {
                                                      String mobileNumber) {
 
         logger.debug("fetchLoanDetails method start");
-        LoanDto loansDto = loanService.fetchLoan(mobileNumber);
+        LoanDto loanDto = loanService.fetchLoan(mobileNumber);
         logger.debug("fetchLoanDetails method start");
-        return ResponseEntity.status(HttpStatus.OK).body(loansDto);
+        return ResponseEntity.status(HttpStatus.OK).body(loanDto);
     }
 
     @Operation(
@@ -131,8 +131,8 @@ public class LoanController {
     }
     )
     @PutMapping("/update")
-    public ResponseEntity<ResponseDto> updateLoanDetails(@Valid @RequestBody LoanDto loansDto) {
-        boolean isUpdated = loanService.updateLoan(loansDto);
+    public ResponseEntity<ResponseDto> updateLoanDetails(@Valid @RequestBody LoanDto loanDto) {
+        boolean isUpdated = loanService.updateLoan(loanDto);
         if (isUpdated) {
             return new ResponseEntity<>(new ResponseDto(LoanConstants.STATUS_200, LoanConstants.MESSAGE_200),
                     HttpStatus.OK);
@@ -192,7 +192,7 @@ public class LoanController {
 
     @Operation(
             summary = "Get Build information",
-            description = "Get Build information that is deployed into cards microservice"
+            description = "Get Build information that is deployed into card microservice"
     )
     @ApiResponses({
             @ApiResponse(
@@ -217,7 +217,7 @@ public class LoanController {
 
     @Operation(
             summary = "Get Java version",
-            description = "Get Java versions details that is installed into cards microservice"
+            description = "Get Java versions details that is installed into card microservice"
     )
     @ApiResponses({
             @ApiResponse(

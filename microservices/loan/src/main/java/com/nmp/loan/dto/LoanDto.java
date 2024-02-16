@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
-@Schema(name = "Loans",
+@Schema(name = "Loan",
         description = "Schema to hold Loan information"
 )
 @Data

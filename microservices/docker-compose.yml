@@ -9,7 +9,7 @@ services:
         limits:
           memory: 700m
     networks:
-      - eazybank
+      - bank
   loan:
     image: "patelnisargm/loan:4.1"
     container_name: loan-ms
@@ -20,7 +20,7 @@ services:
         limits:
           memory: 700m
     networks:
-      - eazybank
+      - bank
   card:
     image: "patelnisargm/card:4.1"
     container_name: card-ms
@@ -31,7 +31,7 @@ services:
         limits:
           memory: 700m
     networks:
-      - eazybank
+      - bank
 networks:
-  eazybank:
+  bank:
     driver: "bridge"

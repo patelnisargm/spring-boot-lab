@@ -5,7 +5,7 @@ import com.nmp.card.entity.Card;
 
 public class CardMapper {
 
-    public static CardDto mapToCardsDto(Card card, CardDto cardDto) {
+    public static CardDto mapToCardDto(Card card, CardDto cardDto) {
         cardDto.setCardNumber(card.getCardNumber());
         cardDto.setCardType(card.getCardType());
         cardDto.setMobileNumber(card.getMobileNumber());
@@ -15,7 +15,7 @@ public class CardMapper {
         return cardDto;
     }
 
-    public static Card mapToCards(CardDto cardDto, Card card) {
+    public static Card mapToCard(CardDto cardDto, Card card) {
         card.setCardNumber(cardDto.getCardNumber());
         card.setCardType(cardDto.getCardType());
         card.setMobileNumber(cardDto.getMobileNumber());

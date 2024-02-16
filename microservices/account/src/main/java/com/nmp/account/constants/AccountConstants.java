@@ -12,7 +12,7 @@ public class AccountConstants {
     public static final String MESSAGE_417_UPDATE = "Update operation failed. Please try again or contact Dev team";
     public static final String MESSAGE_417_DELETE = "Delete operation failed. Please try again or contact Dev team";
 
-    private void AccountsConstants() {
+    private void AccountConstants() {
         // restrict instantiation
     }
     // public static final String  STATUS_500 = "500";

@@ -24,8 +24,8 @@ public class LoanServiceImpl implements ILoanService {
      */
     @Override
     public void createLoan(String mobileNumber) {
-        Optional<Loan> optionalLoans= loanRepository.findByMobileNumber(mobileNumber);
-        if(optionalLoans.isPresent()){
+        Optional<Loan> optionalLoan= loanRepository.findByMobileNumber(mobileNumber);
+        if(optionalLoan.isPresent()){
             throw new LoanAlreadyExistsException("Loan already registered with given mobileNumber "+mobileNumber);
         }
         loanRepository.save(createNewLoan(mobileNumber));
@@ -54,23 +54,23 @@ public class LoanServiceImpl implements ILoanService {
      */
     @Override
     public LoanDto fetchLoan(String mobileNumber) {
-        Loan loans = loanRepository.findByMobileNumber(mobileNumber).orElseThrow(
+        Loan loan = loanRepository.findByMobileNumber(mobileNumber).orElseThrow(
                 () -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber)
         );
-        return LoanMapper.mapToLoansDto(loans, new LoanDto());
+        return LoanMapper.mapToLoanDto(loan, new LoanDto());
     }
 
     /**
      *
-     * @param loansDto - LoansDto Object
+     * @param loanDto - LoanDto Object
      * @return boolean indicating if the update of loan details is successful or not
      */
     @Override
-    public boolean updateLoan(LoanDto loansDto) {
-        Loan loans = loanRepository.findByLoanNumber(loansDto.getLoanNumber()).orElseThrow(
-                () -> new ResourceNotFoundException("Loan", "LoanNumber", loansDto.getLoanNumber()));
-        LoanMapper.mapToLoans(loansDto, loans);
-        loanRepository.save(loans);
+    public boolean updateLoan(LoanDto loanDto) {
+        Loan loan = loanRepository.findByLoanNumber(loanDto.getLoanNumber()).orElseThrow(
+                () -> new ResourceNotFoundException("Loan", "LoanNumber", loanDto.getLoanNumber()));
+        LoanMapper.mapToLoan(loanDto, loan);
+        loanRepository.save(loan);
         return  true;
     }
 
@@ -80,10 +80,10 @@ public class LoanServiceImpl implements ILoanService {
      */
     @Override
     public boolean deleteLoan(String mobileNumber) {
-        Loan loans = loanRepository.findByMobileNumber(mobileNumber).orElseThrow(
+        Loan loan = loanRepository.findByMobileNumber(mobileNumber).orElseThrow(
                 () -> new ResourceNotFoundException("Loan", "mobileNumber", mobileNumber)
         );
-        loanRepository.deleteById(loans.getLoanId());
+        loanRepository.deleteById(loan.getLoanId());
         return true;
     }
 

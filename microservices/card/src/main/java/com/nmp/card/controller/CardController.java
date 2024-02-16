@@ -45,7 +45,7 @@ public class CardController {
 
     @Operation(
             summary = "Create Card REST API",
-            description = "REST API to create new Card inside EazyBank"
+            description = "REST API to create new Card inside bank"
     )
     @ApiResponses({
             @ApiResponse(
@@ -91,9 +91,9 @@ public class CardController {
                                                      @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
                                                      String mobileNumber) {
         logger.debug("fetchCardDetails method start");
-        CardDto cardsDto = cardService.fetchCard(mobileNumber);
+        CardDto cardDto = cardService.fetchCard(mobileNumber);
         logger.debug("fetchCardDetails method end");
-        return ResponseEntity.status(HttpStatus.OK).body(cardsDto);
+        return ResponseEntity.status(HttpStatus.OK).body(cardDto);
     }
 
     @Operation(
@@ -118,8 +118,8 @@ public class CardController {
             )
     })
     @PutMapping("/update")
-    public ResponseEntity<ResponseDto> updateCardDetails(@Valid @RequestBody CardDto cardsDto) {
-        boolean isUpdated = cardService.updateCard(cardsDto);
+    public ResponseEntity<ResponseDto> updateCardDetails(@Valid @RequestBody CardDto cardDto) {
+        boolean isUpdated = cardService.updateCard(cardDto);
         if (isUpdated) {
             return new ResponseEntity<>(new ResponseDto(CardConstants.STATUS_200, CardConstants.MESSAGE_200),
                     HttpStatus.OK);
@@ -168,7 +168,7 @@ public class CardController {
 
     @Operation(
             summary = "Get Build information",
-            description = "Get Build information that is deployed into cards microservice"
+            description = "Get Build information that is deployed into card microservice"
     )
     @ApiResponses({
             @ApiResponse(
@@ -193,7 +193,7 @@ public class CardController {
 
     @Operation(
             summary = "Get Java version",
-            description = "Get Java versions details that is installed into cards microservice"
+            description = "Get Java versions details that is installed into card microservice"
     )
     @ApiResponses({
             @ApiResponse(

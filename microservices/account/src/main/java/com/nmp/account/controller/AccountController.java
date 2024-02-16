@@ -26,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(
-        name = "CRUD REST APIs for Accounts in Bank",
+        name = "CRUD REST APIs for account in Bank",
         description = "CRUD REST APIs in Bank to CREATE, UPDATE, FETCH AND DELETE account details"
 )
 
@@ -47,7 +47,7 @@ public class AccountController {
 
     @Operation(
             summary = "Create Account REST API",
-            description = "REST API to create new Customer &  Account inside EazyBank"
+            description = "REST API to create new Customer &  Account inside bank"
     )
     @ApiResponses({
             @ApiResponse(
@@ -122,7 +122,7 @@ public class AccountController {
 
     @Operation(
             summary = "Get Build information",
-            description = "Get Build information that is deployed into accounts microservice"
+            description = "Get Build information that is deployed into account microservice"
     )
     @ApiResponses({
             @ApiResponse(
@@ -152,7 +152,7 @@ public class AccountController {
 
     @Operation(
             summary = "Get Java version",
-            description = "Get Java versions details that is installed into accounts microservice"
+            description = "Get Java versions details that is installed into account microservice"
     )
     @ApiResponses({
             @ApiResponse(
