@@ -3,4 +3,4 @@ dependencies:
   repository: file://../../bank-common
   version: 0.1.0
 digest: sha256:36447ae598e7648c5f792fd696c5df345bb9cdd623ddfde527acf64f008c9997
-generated: "2024-02-16T23:03:40.840279-05:00"
+generated: "2024-02-16T23:01:32.875757-05:00"

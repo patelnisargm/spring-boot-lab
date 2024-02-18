@@ -1,29 +1,29 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-deploymentName: card-deployment
-serviceName: card
-appLabel: card
-appName: card
+deploymentName: loan-deployment
+serviceName: loan
+appLabel: loan
+appName: loan
 
 replicaCount: 1
 
 image:
-  repository: patelnisargm/card
+  repository: patelnisargm/loan
   tag: 4.2
 
-containerPort: 9000
+containerPort: 8090
 
 service:
   type: ClusterIP
-  port: 9000
-  targetPort: 9000
+  port: 8090
+  targetPort: 8090
 
 appname_enabled: true
 profile_enabled: true
 config_enabled: true
-eureka_enabled: true
-discovery_enabled: false
+eureka_enabled: false
+discovery_enabled: true
 resouceserver_enabled: false
 otel_enabled: true
 kafka_enabled: false
