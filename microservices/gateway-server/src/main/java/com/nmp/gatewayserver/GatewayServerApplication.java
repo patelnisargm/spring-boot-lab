@@ -39,7 +39,7 @@ public class GatewayServerApplication {
                                                                 .setFallbackUri("forward:/contactSupport")
                                                 )
                                 )
-                                .uri("lb://account")
+                                .uri("http://account:8080")
                 )
                 .route(
                         p -> p.path("/bank/loan/**")
@@ -52,7 +52,7 @@ public class GatewayServerApplication {
                                                                 .setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)
                                                 )
                                 )
-                                .uri("lb://loan")
+                                .uri("http://loan:8090")
                 )
                 .route(
                         p -> p.path("/bank/card/**")
@@ -64,7 +64,7 @@ public class GatewayServerApplication {
                                                                 .setRateLimiter(redisRateLimiter())
                                                 )
                                 )
-                                .uri("lb://card")
+                                .uri("http://card:9000")
                 )
                 .build();
     }
