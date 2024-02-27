@@ -5,7 +5,7 @@ LABEL authors="nisargpatel"
 MAINTAINER nmp.com
 
 # Add the application's jar to the image
-COPY target/account-0.0.1-SNAPSHOT.jar account-0.0.1-SNAPSHOT.jar
+COPY microservices/account/target/account.jar account.jar
 
 # execute the application
-ENTRYPOINT ["java", "-jar", "account-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "account.jar"]
