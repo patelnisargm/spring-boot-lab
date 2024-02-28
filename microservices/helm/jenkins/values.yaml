@@ -656,11 +656,11 @@ agent:
   customJenkinsLabels: []
   # name of the secret to be used for image pulling
   imagePullSecretName:
-  componentName: "jenkins-agent"
+  componentName: "agent"
   websocket: false
   directConnection: false
-  privileged: true
-  runAsUser:
+  privileged: false
+  runAsUser: 0
   runAsGroup:
   hostNetworking: false
   resources:
@@ -775,7 +775,7 @@ agent:
   # Max number of spawned agent
   containerCap: 10
   # Pod name
-  podName: "agent"
+  podName: "socket-agent"
   # Allows the Pod to remain active for reuse until the configured number of
   # minutes has passed since the last step was executed on it.
   idleMinutes: 0

@@ -46,4 +46,4 @@ spec:
   ports:
     - name: http
       port: 7080
-      targetPort: 8080
+      targetPort: 7080

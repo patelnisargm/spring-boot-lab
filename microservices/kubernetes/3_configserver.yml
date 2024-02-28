@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: configserver
-        image: patelnisargm/configserver:4.2
+        image: patelnisargm/config-server:4.2
         ports:
         - containerPort: 8070
 ---
