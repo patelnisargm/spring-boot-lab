@@ -100,8 +100,10 @@ pipeline {
 //                     }
 //                 }
 
-                    dir('microservices/helm') {
-                        sh 'helm install kafka kafka'
+                    dir('microservices/helm/environments') {
+                        withKubeConfig(credentialsId: 'k8sToken', namespace: 'kubernetes-dashboard', serverUrl: 'https://kubernetes.default') {
+                            sh 'helm install dev-env dev-env'
+                        }
                     }
             }
         }

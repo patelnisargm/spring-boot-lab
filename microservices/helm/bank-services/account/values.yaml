@@ -6,7 +6,7 @@ serviceName: account
 appLabel: account
 appName: account
 
-replicaCount: 2
+replicaCount: 1
 
 image:
   repository: patelnisargm/account
