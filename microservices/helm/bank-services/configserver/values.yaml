@@ -2,14 +2,14 @@
 # Declare variables to be passed into your templates.
 
 deploymentName: configserver-deployment
-serviceName: configserver
-appLabel: configserver
-appName: configserver
+serviceName: config-server
+appLabel: config-server
+appName: config-server
 
 replicaCount: 1
 
 image:
-  repository: patelnisargm/configserver
+  repository: patelnisargm/config-server
   tag: 4.2
 
 containerPort: 8070

@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk17'
+        maven 'maven3'
+        dockerTool 'docker'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'R4.2', changelog: false, poll: false, url: 'https://github.com/patelnisargm/spring-boot-lab.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('microservices/config-server') {
+                    sh 'mvn compile jib:dockerBuild -DskipTests'
+
+                    script {
+                        withCredentials([usernamePassword(credentialsId: 'dockerRegistryCred', passwordVariable: 'password', usernameVariable: 'username')]) {
+                            sh 'docker login -u ${username} -p ${password}'
+                            sh 'docker push patelnisargm/config-server:4.2'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('tools') {
+            steps {
+                sh '''
+                curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
+                chmod +x ./kubectl
+                install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+                kubectl version --client
+                curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+                chmod 700 get_helm.sh
+                ./get_helm.sh
+                helm version
+                '''
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                dir('microservices/kubernetes') {
+                    withKubeConfig(credentialsId: 'k8sToken', namespace: 'kubernetes-dashboard', serverUrl: 'https://kubernetes.default') {
+                        sh 'kubectl apply -f 3_configserver.yml'
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            sh 'docker logout'
+        }
+    }
+}
