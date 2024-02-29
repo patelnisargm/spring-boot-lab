@@ -2,14 +2,14 @@
 # Declare variables to be passed into your templates.
 
 deploymentName: eurekaserver-deployment
-serviceName: eurekaserver
-appLabel: eurekaserver
-appName: eurekaserver
+serviceName: eureka-server
+appLabel: eureka-server
+appName: eureka-server
 
 replicaCount: 1
 
 image:
-  repository: patelnisargm/eurekaserver
+  repository: patelnisargm/eureka-server
   tag: s14
 
 containerPort: 8071

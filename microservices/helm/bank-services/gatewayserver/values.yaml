@@ -2,14 +2,14 @@
 # Declare variables to be passed into your templates.
 
 deploymentName: gatewayserver-deployment
-serviceName: gatewayserver
-appLabel: gatewayserver
-appName: gatewayserver
+serviceName: gateway-server
+appLabel: gateway-server
+appName: gateway-server
 
 replicaCount: 1
 
 image:
-  repository: patelnisargm/gatewayserver
+  repository: patelnisargm/gateway-server
   tag: 4.2
 
 containerPort: 8072
