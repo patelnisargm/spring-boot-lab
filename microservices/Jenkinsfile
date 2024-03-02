@@ -102,7 +102,7 @@ pipeline {
 
                     dir('microservices/helm/environments') {
                         withKubeConfig(credentialsId: 'k8sToken', namespace: 'kubernetes-dashboard', serverUrl: 'https://kubernetes.default') {
-                            sh 'helm install dev-env dev-env'
+                            //sh 'helm install dev-env dev-env'
                         }
                     }
             }

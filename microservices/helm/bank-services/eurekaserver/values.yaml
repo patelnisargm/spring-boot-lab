@@ -2,9 +2,9 @@
 # Declare variables to be passed into your templates.
 
 deploymentName: eurekaserver-deployment
-serviceName: eureka-server
-appLabel: eureka-server
-appName: eureka-server
+serviceName: eurekaserver
+appLabel: eurekaserver
+appName: eurekaserver
 
 replicaCount: 1
 
